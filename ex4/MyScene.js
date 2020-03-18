@@ -122,7 +122,7 @@ class MyScene extends CGFscene {
         
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
-        //Draw Quad
+        //Draw Quad 
         if (this.displayQuad)
             this.quad.display();
 
