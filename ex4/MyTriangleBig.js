@@ -5,16 +5,33 @@ class MyTriangleBig extends CGFobject {
     }
     initBuffers() {
         this.vertices = [
-            -2, 0, 0,
-            0, 2, 0,
-            2, 0, 0
+            -2, 0, 0,   //0
+            0, 2, 0,    //1
+            2, 0, 0,    //2
+
+
+            -2, 0, 0,   //0 - 3
+            0, 2, 0,    //1 - 4
+            2, 0, 0,    //2 - 5
         ];
 
         //Counter-clockwise reference of vertices
         this.indices = [
             // double-sided
-            0, 1, 2,
-            2, 1, 0
+            0, 2, 1,
+
+            3, 4, 5
+        ];
+
+        this.normals = [
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1,
+
+
+            0, 0, -1,
+            0, 0, -1,
+            0, 0, -1,
         ];
 
         //The defined indices (and corresponding vertices)
