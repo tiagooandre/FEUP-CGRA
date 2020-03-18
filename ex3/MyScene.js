@@ -25,8 +25,6 @@ class MyScene extends CGFscene {
         this.plane = new MyPlane(this, 5);
         this.cone = new MyCone(this, 3, 1);
         this.pyramid = new MyPyramid(this, 3, 1);
-
-        //1
         this.tangram = new MyTangram(this);
         this.cube = new MyUnitCube(this);
         
@@ -42,12 +40,11 @@ class MyScene extends CGFscene {
         this.displayNormals = false;
         this.objectComplexity = 0.5;
         this.scaleFactor = 2.0;
+        this.ambientLight = 0.3;
 
     }
     initLights() {
-        //Criar slider para variar a intensidade da iluminação ambiente global da cena
-        this.sgal = 0.3; //variável de controlo
-        this.setGlobalAmbientLight(this.sgal, this.sgal, this.sgal, 1.0);
+        this.setGlobalAmbientLight(this.ambientLight, this.ambientLight, this.ambientLight, 1.0);
 
         this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -100,15 +97,9 @@ class MyScene extends CGFscene {
 
     };
 
-    updateObjectComplexity(){
-        this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
-    }
-
-
-    //Criar slider para variar a intensidade da iluminação ambiente global da cena
-    updateAmbientLight() {
-        this.setGlobalAmbientLight(this.sgal, this.sgal, this.sgal, 1.0)
-    }
+    // updateObjectComplexity(){
+    //     this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
+    // }
 
 
     initMaterials() {
@@ -133,15 +124,11 @@ class MyScene extends CGFscene {
         this.material3.setSpecular(1, 0, 0, 1.0);
         this.material3.setShininess(10.0);
 
-        //4. Similar com madeira
-        //Não se pode usar RGB diretamente
-        var woodRGB = this.hexToRgbA("#855E42");
-        var factor = 6;
-
+        // Wood
         this.material4 = new CGFappearance(this);
-        this.material4.setAmbient(woodRGB[0], woodRGB[1], woodRGB[2], 1.0);
-        this.material4.setDiffuse(woodRGB[0], woodRGB[1], woodRGB[2], 1.0);
-        this.material4.setSpecular(woodRGB[0], woodRGB[1], woodRGB[2], 1.0);
+        this.material4.setAmbient(0.0, 0.0, 0.0, 1.0);
+        this.material4.setDiffuse(0.58, 0.44, 0.2, 1.0);
+        this.material4.setSpecular(0.05, 0.05, 0.05, 1.0);
         this.material4.setShininess(10.0);
 
         // Custom material (can be changed in the interface)
@@ -157,10 +144,10 @@ class MyScene extends CGFscene {
 
         this.updateCustomMaterial();
 
-        this.materials = [this.material1, this.material2, this.material3, this.customMaterial, this.material4];
+        this.materials = [this.material1, this.material2, this.material3, this.material4, this.customMaterial];
 
         // Labels and ID's for object selection on MyInterface
-        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3 , 'Wood Low Specular': 4};
+        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Wood': 3, 'Custom': 4 };
     }
     display() {
         // ---- BEGIN Background, camera and axis setup
@@ -179,6 +166,8 @@ class MyScene extends CGFscene {
         // Draw axis
         if (this.displayAxis)
             this.axis.display();
+
+        this.setGlobalAmbientLight(this.ambientLight, this.ambientLight, this.ambientLight, 1.0);
 
         // ---- BEGIN Primitive drawing section
 
