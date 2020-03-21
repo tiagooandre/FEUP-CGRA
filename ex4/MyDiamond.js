@@ -30,10 +30,10 @@ class MyDiamond extends CGFobject { //Classe usada para desejar os objetos
 		];
 
 		this.texCoords=[
-			0, 0,
-			0, 1.0,
-			1.0, 0,
-			1.0, 1.0,
+			0, 0.5,
+			0.25, 0.75,
+			0.25, 0.25,
+			0.5, 0.5,
 		];
 
 		//The defined indices (and corresponding vertices)
