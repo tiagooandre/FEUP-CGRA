@@ -48,13 +48,13 @@ class MyTangram extends CGFobject {
         this.m6.setSpecular(1, 1, 1, 1.0);
 
         //------ Applied Material in MyDiamond
-        this.tangramTex = new CGFappearance(this.scene);
-        this.tangramTex.setAmbient(0.1, 0.1, 0.1, 1);
-        this.tangramTex.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.tangramTex.setSpecular(0.1, 0.1, 0.1, 1);
-        this.tangramTex.setShininess(10.0);
-        this.tangramTex.loadTexture('images/tangram.png');
-        this.tangramTex.setTextureWrap('REPEAT', 'REPEAT');
+        this.tangram_tex = new CGFappearance(this.scene);
+        this.tangram_tex.setAmbient(0.1, 0.1, 0.1, 1);
+        this.tangram_tex.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.tangram_tex.setSpecular(0.1, 0.1, 0.1, 1);
+        this.tangram_tex.setShininess(10.0);
+        this.tangram_tex.loadTexture('images/tangram.png');
+        this.tangram_tex.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     display() {
@@ -75,7 +75,7 @@ class MyTangram extends CGFobject {
             0, 0, 0, 1
         ];
         this.scene.multMatrix(rot1);
-        this.tangramTex.apply();
+        this.tangram_tex.apply();
         this.diamond.display();
         this.scene.popMatrix();
 
@@ -83,7 +83,7 @@ class MyTangram extends CGFobject {
         angle = 45*Math.PI/180;
         this.scene.rotate(angle, 0, 0, 1);
         this.scene.translate(1, 1, 0);
-        this.m1.apply();
+        this.tangram_tex.apply();
         this.triangle.display();
         this.scene.popMatrix();
 
@@ -103,13 +103,13 @@ class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(2.5, 1.5, 0);
         this.scene.rotate(Math.PI, 1, 0, 0);
-        this.m4.apply();
+        this.tangram_tex.apply();
         this.parallelogram.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-3.8, 1, 0);
-        this.m5.apply();
+        this.tangram_tex.apply();
         this.trianglesmall.display();
         this.scene.popMatrix();
 
