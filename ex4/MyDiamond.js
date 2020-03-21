@@ -29,11 +29,17 @@ class MyDiamond extends CGFobject { //Classe usada para desejar os objetos
 			0, 0, 1
 		];
 
+		this.texCoords=[
+			0, 0,
+			0, 1.0,
+			1.0, 0,
+			1.0, 1.0,
+		];
+
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
 		this.primitiveType = this.scene.gl.TRIANGLES;
-
-		this.initGLBuffers(); //Pega nesta informação e carrega-a para a placa gráfica
+		this.initGLBuffers();
 	}
 }
 

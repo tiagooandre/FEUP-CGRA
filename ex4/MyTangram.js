@@ -16,7 +16,7 @@ class MyTangram extends CGFobject {
         this.trianglesmall = new MyTriangleSmall(this.scene);
         this.trianglesmall2 = new MyTriangleSmall(this.scene);
     }
-    initMaterials(scene){
+    initMaterials(scene) {
         this.m1 = new CGFappearance(scene);
         this.m1.setAmbient(0.1, 0.1, 0.1, 1.0);
         this.m1.setDiffuse(1, 0.752, 0.796, 1);
@@ -46,7 +46,17 @@ class MyTangram extends CGFobject {
         this.m6.setAmbient(0.1, 0.1, 0.1, 1.0);
         this.m6.setDiffuse(0.6, 0.19, 0.8, 1);
         this.m6.setSpecular(1, 1, 1, 1.0);
+
+        //------ Applied Material in MyDiamond
+        this.tangramTex = new CGFappearance(this.scene);
+        this.tangramTex.setAmbient(0.1, 0.1, 0.1, 1);
+        this.tangramTex.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.tangramTex.setSpecular(0.1, 0.1, 0.1, 1);
+        this.tangramTex.setShininess(10.0);
+        this.tangramTex.loadTexture('images/tangram.png');
+        this.tangramTex.setTextureWrap('REPEAT', 'REPEAT');
     }
+
     display() {
         this.scene.pushMatrix();
         var tra2 = [
@@ -65,6 +75,7 @@ class MyTangram extends CGFobject {
             0, 0, 0, 1
         ];
         this.scene.multMatrix(rot1);
+        this.tangramTex.apply();
         this.diamond.display();
         this.scene.popMatrix();
 
@@ -110,6 +121,7 @@ class MyTangram extends CGFobject {
         this.scene.popMatrix();
 
     }
+
     enableNormalViz() {
         this.diamond.enableNormalViz();
         this.triangle.enableNormalViz();
@@ -119,6 +131,7 @@ class MyTangram extends CGFobject {
         this.trianglesmall.enableNormalViz();
         this.trianglesmall2.enableNormalViz();
     }
+
     disableNormalViz() {
         this.diamond.disableNormalViz();
         this.triangle.disableNormalViz();
@@ -127,5 +140,10 @@ class MyTangram extends CGFobject {
         this.parallelogram.disableNormalViz();
         this.trianglesmall.disableNormalViz();
         this.trianglesmall2.disableNormalViz();
+    }
+
+    updateBuffers(complexity){
+        this.initBuffers();
+        this.initNormalVizBuffers();
     }
 }
