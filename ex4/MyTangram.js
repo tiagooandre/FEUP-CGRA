@@ -103,13 +103,13 @@ class MyTangram extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(2.5, 1.5, 0);
         this.scene.rotate(Math.PI, 1, 0, 0);
-        this.tangram_tex.apply();
+        this.m4.apply();
         this.parallelogram.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-3.8, 1, 0);
-        this.tangram_tex.apply();
+        this.m5.apply();
         this.trianglesmall.display();
         this.scene.popMatrix();
 

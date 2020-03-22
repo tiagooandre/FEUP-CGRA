@@ -4,6 +4,7 @@ class MyParallelogram extends CGFobject {
         this.initBuffers();
     }
     initBuffers() {
+
         this.vertices = [
             0,  0,  0,      //0
             1,  1,  0,      //1
@@ -49,26 +50,6 @@ class MyParallelogram extends CGFobject {
             0, 0, -1,
             0, 0, -1,
             0, 0, -1,
-        ];
-
-        this.texCoords=[
-            1.0, 1.0,
-            0.67, 0.0,
-            0.0, 0.0,
-            0.33, 1.0
-
-            // 0.25, 0.75,
-            // 0.5, 0.75,
-            // 0.5, 1.0,
-            // 0.5, 0.75,
-            // 0.5, 1.0,
-            // 0.75, 0.75,
-            // 0.75, 0.75,
-            // 0.5, 1.0,
-            // 0.75, 1.0,
-            // 0.75, 1.0,
-            // 0.75, 0.75,
-            // 1.0, 1.0
         ];
 
         //The defined indices (and corresponding vertices)
