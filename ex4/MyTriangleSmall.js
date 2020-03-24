@@ -1,11 +1,13 @@
 class MyTriangleSmall extends CGFobject {
-    constructor(scene) {
+    color;
+
+    constructor(scene, color) {
         super(scene);
+        this.color = color;
         this.initBuffers();
     }
     initBuffers() {
         this.vertices = [
-            0, 0, 0,
             0, 1, 0,
             -1, 0, 0,
             1, 0, 0
@@ -13,9 +15,7 @@ class MyTriangleSmall extends CGFobject {
 
         //Counter-clockwise reference of vertices
         this.indices = [
-            // double-sided
             0, 1, 2,
-            1, 2, 3
         ];
 
         this.normals = [
@@ -25,14 +25,19 @@ class MyTriangleSmall extends CGFobject {
             0, 0, 1
         ];
 
-        this.texCoords = [
-            0.25, 0.75,
-            0.5, 0.5,
-            0.5, 0.75,
-            0.5, 0.5,
-            0.5, 0.75,
-            0.75, 0.75
-        ];
+        if (this.color == 0) {
+            this.texCoords = [
+                0.25, 0.75,
+                0.5, 0.5,
+                0.5, 0.75
+            ];
+        } else {
+            this.texCoords = [
+                0.25, 0.25,
+                0, 0,
+                0, 0.5
+            ];
+        }
 
         //The defined indices (and corresponding vertices)
         //will be read in groups of three to draw triangles

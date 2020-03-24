@@ -1,6 +1,11 @@
 class MyTriangleBig extends CGFobject {
-    constructor(scene) {
+    color;
+
+    constructor (scene, color) {
         super(scene);
+
+        this.color = color;
+
         this.initBuffers();
     }
     initBuffers() {
@@ -33,6 +38,28 @@ class MyTriangleBig extends CGFobject {
             0, 0, -1,
             0, 0, -1,
         ];
+
+        if (this.color == 0) {
+            this.texCoords = [
+                1, 0,
+                0.5, 0.5,
+                0, 0,
+
+                1, 0,
+                0.5, 0.5,
+                0, 0
+            ];
+        } else {
+            this.texCoords = [
+                1, 1,
+                0.5, 0.5,
+                1, 0,
+
+                1, 1,
+                0.5, 0.5,
+                1, 0,
+            ];
+        }
 
         //The defined indices (and corresponding vertices)
         //will be read in groups of three to draw triangles

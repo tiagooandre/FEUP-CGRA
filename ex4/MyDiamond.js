@@ -29,7 +29,7 @@ class MyDiamond extends CGFobject {
 			0, 0, 1
 		];
 
-		this.texCoords=[
+		this.texCoords = [
 			0, 0.5,
 			0.25, 0.75,
 			0.25, 0.25,

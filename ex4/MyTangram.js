@@ -10,11 +10,11 @@ class MyTangram extends CGFobject {
 
         this.diamond = new MyDiamond(this.scene);
         this.triangle = new MyTriangle(this.scene);
-        this.trianglebig = new MyTriangleBig(this.scene);
-        this.trianglebig2 = new MyTriangleBig(this.scene);
+        this.trianglebig = new MyTriangleBig(this.scene, 0);
+        this.trianglebig2 = new MyTriangleBig(this.scene, 1);
         this.parallelogram = new MyParallelogram(this.scene);
-        this.trianglesmall = new MyTriangleSmall(this.scene);
-        this.trianglesmall2 = new MyTriangleSmall(this.scene);
+        this.trianglesmall = new MyTriangleSmall(this.scene, 0);
+        this.trianglesmall2 = new MyTriangleSmall(this.scene, 1);
     }
     initMaterials(scene) {
         this.m1 = new CGFappearance(scene);
@@ -58,6 +58,8 @@ class MyTangram extends CGFobject {
     }
 
     display() {
+        this.tangram_tex.apply();
+
         this.scene.pushMatrix();
         var tra2 = [
             1, 0, 0, 0,
@@ -75,7 +77,6 @@ class MyTangram extends CGFobject {
             0, 0, 0, 1
         ];
         this.scene.multMatrix(rot1);
-        this.tangram_tex.apply();
         this.diamond.display();
         this.scene.popMatrix();
 
@@ -83,40 +84,34 @@ class MyTangram extends CGFobject {
         angle = 45*Math.PI/180;
         this.scene.rotate(angle, 0, 0, 1);
         this.scene.translate(1, 1, 0);
-        this.tangram_tex.apply();
         this.triangle.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(2, 0, 0);
-        this.m2.apply();
         this.trianglebig.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-1.40, 1.4, 0);
         this.scene.rotate(135.0*Math.PI/180.0, 0, 0, 1);
-        this.m3.apply();
         this.trianglebig2.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(2.5, 1.5, 0);
         this.scene.rotate(Math.PI, 1, 0, 0);
-        this.m4.apply();
         this.parallelogram.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-3.8, 1, 0);
-        this.m5.apply();
         this.trianglesmall.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-3, 3, 0);
         this.scene.rotate(-45.0*Math.PI/180.0, 0, 0, 1);
-        this.m6.apply();
         this.trianglesmall2.display();
         this.scene.popMatrix();
 
