@@ -51,7 +51,7 @@ class ShaderScene extends CGFscene {
 		this.appearance.setSpecular(0.0, 0.0, 0.0, 1);
 		this.appearance.setShininess(120);
 
-		this.texture = new CGFtexture(this, "textures/waterTex.jpg");
+		this.texture = new CGFtexture(this, "textures/texture.jpg");
 		this.appearance.setTexture(this.texture);
 		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
@@ -79,6 +79,7 @@ class ShaderScene extends CGFscene {
 		this.testShaders[5].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ timeFactor: 0 });
+
 		this.testShaders[11].setUniformsValues( {uSampler2: 1}, {timeFactor: 0});
 
 
