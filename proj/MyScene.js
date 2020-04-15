@@ -33,7 +33,7 @@ class MyScene extends CGFscene {
         ];
 
         this.objectList = {
-            'Cilinder': 0,
+            'Cylinder': 0,
             'Sphere': 1
         };
 
