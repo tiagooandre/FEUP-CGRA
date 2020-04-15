@@ -5,6 +5,7 @@
 class MyScene extends CGFscene {
     constructor() {
         super();
+        this.selectedElement = 0;
     }
     init(application) {
         super.init(application);
@@ -25,16 +26,29 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.incompleteSphere = new MySphere(this, 16, 8);
+
+        this.objects = [
+            new MyCylinder(this, 20),
+            new MySphere(this, 16, 8)
+        ];
+
+        this.objectList = {
+            'Cilinder': 0,
+            'Sphere': 1
+        };
 
         //Objects connected to MyInterface
         this.displayAxis = true;
 
         //Textures
         this.appearance = new CGFappearance(this);
-        this.earth = new CGFtexture(this, "images/earth.jpg");
 
-        this.appearance.setTexture(this.earth);
+        this.textures = [
+            new CGFtexture(this, "images/cylinder_red.png"),
+            new CGFtexture(this, "images/earth.jpg")
+        ];
+
+        this.appearance.setTexture(this.textures[this.selectedElement]);
         this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     }
     initLights() {
@@ -76,10 +90,11 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
+        this.appearance.setTexture(this.textures[this.selectedElement]);
         this.appearance.apply();
 
-        //This sphere does not have defined texture coordinates
-        this.incompleteSphere.display();
+
+        this.objects[this.selectedElement].display();
 
         // ---- END Primitive drawing section
     }
