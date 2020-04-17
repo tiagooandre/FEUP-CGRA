@@ -4,6 +4,13 @@ class MyVehicle extends CGFobject {
         this.slices = slices;
         // this.stacks = stacks;
         this.initBuffers();
+
+        //control variables
+        this.angle = 0; //ângulo em torno dos yy
+        this.speed = 0; //velocidade
+        this.posx = 0;
+        this.posy = 0;  //posição
+        this.posz = 0;
     }
     initBuffers() {
         this.vertices = [];
@@ -58,12 +65,33 @@ class MyVehicle extends CGFobject {
         this.initGLBuffers();
     }
 
-    updateBuffers(complexity){
+    updateBuffers(complexity) {
         this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-1, so slices varies 3-12
 
         // reinitialize buffers
         this.initBuffers();
         this.initNormalVizBuffers();
+    }
+
+    update() {
+        this.posz += this.speed * Math.cos(this.angle * Math.PI / 180.0);
+        this.posx += this.speed * Math.sin(this.angle * Math.PI / 180.0);
+    }
+
+    turn(val) {
+        this.angle += val;
+    }
+
+    accelerate(val) {
+        this.speed = val;
+    }
+
+    reset() {
+        this.posx = 0;
+        this.posy = 0;
+        this.posz = 0;
+        this.angle = 0;
+        this.speed = 0;
     }
 
     display() {
@@ -72,7 +100,12 @@ class MyVehicle extends CGFobject {
         this.scene.setAmbient(0, 0, 0.5, 1);
 
         this.scene.pushMatrix();
-        // this.scene.translate(0, 0, -1);
+        this.scene.translate(this.posx, this.posy, this.posz); //Posicionar o veículo
+        this.scene.rotate(this.angle * Math.PI / 180.0, 0, 1, 0); //Orientar o veículo
+
+        this.scene.translate(0, 0, -1); //Centrar o veículo
+
+        this.scene.scale(1, 1, 2);
         this.scene.rotate(90.0 * Math.PI / 180.0, 1, 0, 0);
         super.display();
         this.scene.popMatrix();
