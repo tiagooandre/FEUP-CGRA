@@ -30,13 +30,15 @@ class MyScene extends CGFscene {
         this.objects = [
             new MyCylinder(this, 20),
             new MySphere(this, 16, 8),
-            new MyCubeMap(this)
+            new MyCubeMap(this),
+            new MyVehicle(this, 4)
         ];
 
         this.objectList = {
             'Cylinder': 0,
             'Sphere': 1,
-            'Cube': 2
+            'Cube': 2,
+            'Vehicle': 3
         };
 
         //Objects connected to MyInterface
@@ -47,8 +49,19 @@ class MyScene extends CGFscene {
 
         this.textures = [
             new CGFtexture(this, "images/cylinder_red.png"),
-            new CGFtexture(this, "images/earth.jpg")
+            new CGFtexture(this, "images/earth.jpg"),
+            new CGFtexture(this, "images/example.png"),
+            new CGFtexture(this, "images/cubemap.png"),
+            new CGFtexture(this, "images/mountain.png")
         ];
+
+        this.textureOptions = {
+            'Cylinder Red': 0,
+            'Earth': 1,
+            'Example': 2,
+            'CubeMap': 3,
+            'Mountain': 4
+        };
 
         this.appearance.setTexture(this.textures[this.selectedElement]);
         this.appearance.setTextureWrap('REPEAT', 'REPEAT');
@@ -72,6 +85,9 @@ class MyScene extends CGFscene {
     update(t){
         //To be done...
     }
+    // onSelectedTextureChanged(v) {
+    //     this.Material.setTexture(this.textures[this.selectedTexture]);
+    // }
 
     display() {
         // ---- BEGIN Background, camera and axis setup
