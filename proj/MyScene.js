@@ -6,6 +6,9 @@ class MyScene extends CGFscene {
     constructor() {
         super();
         this.selectedElement = 0;
+        this.selectedTexture = 0;
+        this.speedFactor = 1;
+        this.scaleFactor = 1;
 
         this.displayVehicle = false;
     }
@@ -50,23 +53,24 @@ class MyScene extends CGFscene {
         //Textures
         this.appearance = new CGFappearance(this);
 
-        this.textures = [
+        this.fixedTextures = [
             new CGFtexture(this, "images/cylinder_red.png"),
             new CGFtexture(this, "images/earth.jpg"),
+        ];
+
+        this.cubeTextures = [
             new CGFtexture(this, "images/example.png"),
             new CGFtexture(this, "images/cubemap.png"),
             new CGFtexture(this, "images/mountain.png")
         ];
 
-        this.textureOptions = {
-            'Cylinder Red': 0,
-            'Earth': 1,
-            'Example': 2,
-            'CubeMap': 3,
-            'Mountain': 4
+        this.cubeTextureOptions = {
+            'Example': 0,
+            'CubeMap': 1,
+            'Mountain': 2
         };
 
-        this.appearance.setTexture(this.textures[this.selectedElement]);
+        this.appearance.setTexture(this.fixedTextures[this.selectedTexture]);
         this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     }
 
@@ -95,13 +99,13 @@ class MyScene extends CGFscene {
         // Check for key codes e.g. in ​https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
             // text += " W ";
-            this.vehicle.accelerate(0.2)
+            this.vehicle.accelerate(0.2 * this.speedFactor);
             keysPressed = true;
         }
 
         if (this.gui.isKeyPressed("KeyS")) {
             // text += " S ";
-            this.vehicle.accelerate(-0.2);
+            this.vehicle.accelerate(-0.2 * this.speedFactor);
             keysPressed = true;
         }
 
@@ -148,13 +152,21 @@ class MyScene extends CGFscene {
         if (this.displayAxis)
             this.axis.display();
 
-        if (this.displayVehicle)
+        if (this.displayVehicle) {
+            this.pushMatrix();
+            this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
             this.vehicle.display();
+            this.popMatrix();
+        }
 
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        this.appearance.setTexture(this.textures[this.selectedElement]);
+        if (this.selectedElement < 2) {
+            this.appearance.setTexture(this.fixedTextures[this.selectedElement]);
+        } else {
+            this.appearance.setTexture(this.cubeTextures[this.selectedTexture]);
+        }
         this.appearance.apply();
 
         this.objects[this.selectedElement].display();
