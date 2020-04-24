@@ -36,13 +36,15 @@ class MyScene extends CGFscene {
         this.objects = [
             new MyCylinder(this, 20),
             new MySphere(this, 16, 8),
+            new MyEllipsoid(this),
             new MyCubeMap(this)
         ];
 
         this.objectList = {
             'Cylinder': 0,
             'Sphere': 1,
-            'Cube': 2
+            'Zeppelin': 2,
+            'Cube': 3
         };
 
         this.vehicle = new MyVehicle(this, 4);
@@ -162,7 +164,7 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        if (this.selectedElement < 2) {
+        if (this.selectedElement < 3) {
             this.appearance.setTexture(this.fixedTextures[this.selectedElement]);
         } else {
             this.appearance.setTexture(this.cubeTextures[this.selectedTexture]);
