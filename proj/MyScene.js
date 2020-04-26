@@ -5,7 +5,7 @@
 class MyScene extends CGFscene {
     constructor() {
         super();
-        this.selectedElement = 0;
+        this.selectedElement = 2;
         this.selectedTexture = 0;
         this.speedFactor = 1;
         this.scaleFactor = 1;
@@ -36,7 +36,7 @@ class MyScene extends CGFscene {
         this.objects = [
             new MyCylinder(this, 20),
             new MySphere(this, 16, 8),
-            new MyEllipsoid(this),
+            new MyZeppelin(this),
             new MyCubeMap(this)
         ];
 

@@ -7,7 +7,7 @@ class MyEllipsoid extends CGFobject {
 
     display() {
         this.scene.pushMatrix();
-        this.scene.scale(2, 1, 1);
+        this.scene.scale(1, 1, 2);
         this.sphere.display();
         this.scene.popMatrix();
     }
