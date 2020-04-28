@@ -36,6 +36,10 @@ class MyZeppelin extends CGFobject {
         this.scene.translate(0, 0.2, -1.25);
         this.scene.rotate(Math.PI /2, 0, 0, 1);
         this.scene.rotate(Math.PI /2, 1, 0, 0);
+        if (this.scene.gui.isKeyPressed("KeyD"))
+            this.scene.rotate(45 * Math.PI / 180, 0, 1, 0);
+        if (this.scene.gui.isKeyPressed("KeyA"))
+            this.scene.rotate(-45 * Math.PI / 180, 0, 1, 0);
         this.Fin.display();
         this.scene.popMatrix();
 
@@ -44,6 +48,10 @@ class MyZeppelin extends CGFobject {
         this.scene.translate(0, -0.2, -1.25);
         this.scene.rotate(-Math.PI /2, 0, 0, 1);
         this.scene.rotate(Math.PI /2, 1, 0, 0);
+        if (this.scene.gui.isKeyPressed("KeyD"))
+            this.scene.rotate(-45 * Math.PI / 180, 0, 1, 0);
+        if (this.scene.gui.isKeyPressed("KeyA"))
+            this.scene.rotate(45 * Math.PI / 180, 0, 1, 0);
         this.Fin.display();
         this.scene.popMatrix();
 
