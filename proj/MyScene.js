@@ -97,30 +97,35 @@ class MyScene extends CGFscene {
         var keysPressed = false;
 
         // Check for key codes e.g. in ​https://keycode.info/
-        if (this.gui.isKeyPressed("KeyW")) {
+        if (this.gui.isKeyPressed("KeyW") /*&& !this.vehicle.autopilot*/) {
             this.vehicle.accelerate(0.2 * this.speedFactor);
             keysPressed = true;
         }
 
-        if (this.gui.isKeyPressed("KeyS")) {
+        if (this.gui.isKeyPressed("KeyS") /*&& !this.vehicle.autopilot*/) {
             this.vehicle.accelerate(-0.2 * this.speedFactor);
             keysPressed = true;
         }
 
-        if (this.gui.isKeyPressed("KeyA")) {
+        if (this.gui.isKeyPressed("KeyA") /*&& !this.vehicle.autopilot*/) {
             this.vehicle.turn(10);
             keysPressed = true;
         }
 
-        if (this.gui.isKeyPressed("KeyD")) {
+        if (this.gui.isKeyPressed("KeyD") /*&& !this.vehicle.autopilot*/) {
             this.vehicle.turn(-10);
             keysPressed = true;
         }
 
-        if (this.gui.isKeyPressed("KeyR")) {
+        if (this.gui.isKeyPressed("KeyR") /*&& !this.vehicle.autopilot*/) {
             this.vehicle.reset();
             keysPressed = true;
         }
+
+        /*if (this.gui.isKeyPressed("KeyP") && !this.vehicle.autopilot) {
+            this.vehicle.activeautopilot();
+            keysPressed = true;
+        }*/
 
         if (keysPressed)
             this.vehicle.update();

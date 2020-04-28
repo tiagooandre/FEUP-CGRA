@@ -14,6 +14,9 @@ class MyVehicle extends CGFobject {
         this.posx = 0;
         this.posy = 0;  //posição
         this.posz = 0;
+
+        // this.autopilot = false;
+        // this.angpilot = 0;
     }
 
     initBuffers() {
@@ -78,9 +81,20 @@ class MyVehicle extends CGFobject {
     }
 
     update() {
-        this.posz += this.speed * Math.cos(this.angle * Math.PI / 180.0);
-        this.posx += this.speed * Math.sin(this.angle * Math.PI / 180.0);
+        if (this.autopilot) {
+            this.angpilot += 2.0 * Math.PI / 5.0; //perímetro
+            //this.angpilot += 2.0*Math.PI*(1000.0/60.0) / 5000.0;
+        }
+        else {
+            this.posz += this.speed * Math.cos(this.angle * Math.PI / 180.0);
+            this.posx += this.speed * Math.sin(this.angle * Math.PI / 180.0);
+        }
     }
+
+    /*activeautopilot() {
+        this.autopilot = true;
+        this.angpilot = 0;
+    }*/
 
     turn(val) {
         this.angle += val;
@@ -96,6 +110,8 @@ class MyVehicle extends CGFobject {
         this.posz = 0;
         this.angle = 0;
         this.speed = 0;
+
+        // this.autopilot = false;
     }
 
     display() {
@@ -108,6 +124,10 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(this.angle * Math.PI / 180.0, 0, 1, 0); //Orientar o veículo
 
         this.scene.translate(0, 0, -1); //Centrar o veículo
+
+        // if (this.autopilot) {
+        //
+        // }
 
         //this.scene.scale(1, 1, 2);
         //this.scene.rotate(90.0 * Math.PI / 180.0, 1, 0, 0);
