@@ -5,6 +5,9 @@ class MyVehicle extends CGFobject {
         // this.stacks = stacks;
         this.initBuffers();
 
+        //
+        this.body = new MyZeppelin(this.scene);
+
         //control variables
         this.angle = 0; //ângulo em torno dos yy
         this.speed = 0; //velocidade
@@ -12,6 +15,7 @@ class MyVehicle extends CGFobject {
         this.posy = 0;  //posição
         this.posz = 0;
     }
+
     initBuffers() {
         this.vertices = [];
         this.indices = [];
@@ -105,9 +109,10 @@ class MyVehicle extends CGFobject {
 
         this.scene.translate(0, 0, -1); //Centrar o veículo
 
-        this.scene.scale(1, 1, 2);
-        this.scene.rotate(90.0 * Math.PI / 180.0, 1, 0, 0);
-        super.display();
+        //this.scene.scale(1, 1, 2);
+        //this.scene.rotate(90.0 * Math.PI / 180.0, 1, 0, 0);
+        // super.display();
+        this.body.display();
         this.scene.popMatrix();
     }
 }

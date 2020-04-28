@@ -36,15 +36,13 @@ class MyScene extends CGFscene {
         this.objects = [
             new MyCylinder(this, 20),
             new MySphere(this, 16, 8),
-            new MyZeppelin(this),
             new MyCubeMap(this)
         ];
 
         this.objectList = {
             'Cylinder': 0,
             'Sphere': 1,
-            'Zeppelin': 2,
-            'Cube': 3
+            'Cube': 2
         };
 
         this.vehicle = new MyVehicle(this, 4);
@@ -100,31 +98,26 @@ class MyScene extends CGFscene {
 
         // Check for key codes e.g. in ​https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
-            // text += " W ";
             this.vehicle.accelerate(0.2 * this.speedFactor);
             keysPressed = true;
         }
 
         if (this.gui.isKeyPressed("KeyS")) {
-            // text += " S ";
             this.vehicle.accelerate(-0.2 * this.speedFactor);
             keysPressed = true;
         }
 
         if (this.gui.isKeyPressed("KeyA")) {
-            // text += " S ";
             this.vehicle.turn(10);
             keysPressed = true;
         }
 
         if (this.gui.isKeyPressed("KeyD")) {
-            // text += " S ";
             this.vehicle.turn(-10);
             keysPressed = true;
         }
 
         if (this.gui.isKeyPressed("KeyR")) {
-            // text += " S ";
             this.vehicle.reset();
             keysPressed = true;
         }
@@ -164,7 +157,7 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        if (this.selectedElement < 3) {
+        if (this.selectedElement < 2) {
             this.appearance.setTexture(this.fixedTextures[this.selectedElement]);
         } else {
             this.appearance.setTexture(this.cubeTextures[this.selectedTexture]);
