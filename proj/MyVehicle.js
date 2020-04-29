@@ -15,8 +15,8 @@ class MyVehicle extends CGFobject {
         this.posy = 0;  //posição
         this.posz = 0;
 
-        // this.autopilot = false;
-        // this.angpilot = 0;
+        this.autopilot = false;
+        this.angpilot = 0;
     }
 
     initBuffers() {
@@ -82,8 +82,7 @@ class MyVehicle extends CGFobject {
 
     update() {
         if (this.autopilot) {
-            this.angpilot += 2.0 * Math.PI / 5.0; //perímetro
-            //this.angpilot += 2.0*Math.PI*(1000.0/60.0) / 5000.0;
+            this.angpilot += 2 * Math.PI / (5 * 60);
         }
         else {
             this.posz += this.speed * Math.cos(this.angle * Math.PI / 180.0);
@@ -91,10 +90,10 @@ class MyVehicle extends CGFobject {
         }
     }
 
-    /*activeautopilot() {
+    activeautopilot() {
         this.autopilot = true;
         this.angpilot = 0;
-    }*/
+    }
 
     turn(val) {
         this.angle += val;
@@ -102,6 +101,9 @@ class MyVehicle extends CGFobject {
 
     accelerate(val) {
         this.speed = val;
+        if (this.speed < 0) {
+            this.speed = 0;
+        }
     }
 
     reset() {
@@ -110,8 +112,7 @@ class MyVehicle extends CGFobject {
         this.posz = 0;
         this.angle = 0;
         this.speed = 0;
-
-        // this.autopilot = false;
+        this.autopilot = false;
     }
 
     display() {
@@ -121,13 +122,17 @@ class MyVehicle extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.translate(this.posx, this.posy, this.posz); //Posicionar o veículo
+
+        if (this.autopilot) {
+            this.scene.translate(-5*Math.cos(-this.angle*Math.PI/180.0), 0, -5*Math.sin(-this.angle * Math.PI / 180.0));
+            this.scene.rotate(-this.angpilot, 0, 1, 0);
+            this.scene.translate(5*Math.cos(-this.angle*Math.PI/180.0), 0, 5*Math.sin(-this.angle * Math.PI / 180.0));
+        }
+
         this.scene.rotate(this.angle * Math.PI / 180.0, 0, 1, 0); //Orientar o veículo
 
-        this.scene.translate(0, 0, -1); //Centrar o veículo
+        // this.scene.translate(0, 0, -1); //Centrar o veículo
 
-        // if (this.autopilot) {
-        //
-        // }
 
         //this.scene.scale(1, 1, 2);
         //this.scene.rotate(90.0 * Math.PI / 180.0, 1, 0, 0);
