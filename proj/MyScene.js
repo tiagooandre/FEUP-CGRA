@@ -10,7 +10,7 @@ class MyScene extends CGFscene {
         this.speedFactor = 1;
         this.scaleFactor = 1;
 
-        this.displayVehicle = false;
+        this.displayVehicle = true;
     }
 
     init(application) {
