@@ -4,6 +4,8 @@ class MyZeppelin extends CGFobject {
 
         this.mainBody = new MyEllipsoid(this.scene);
         this.Fin = new MyFin(this.scene);
+        this.cabin = new MyCabin(this.scene);
+        this.propeller = new MyPropeller(this.scene);
     }
 
     display() {
@@ -14,6 +16,27 @@ class MyZeppelin extends CGFobject {
         this.scene.pushMatrix();
         this.scene.scale(0.5, 0.5, 0.5);
         this.mainBody.display();
+        this.scene.popMatrix();
+
+        //Cabin
+        this.scene.pushMatrix();
+        this.scene.translate(0, -0.55, -0.25);
+        this.scene.scale(0.125, 0.125, 0.125);
+        this.cabin.display();
+        this.scene.popMatrix();
+
+        //Left Propeller
+        this.scene.pushMatrix();
+        this.scene.translate(0.1625, -0.55, -0.3125);
+        this.scene.scale(0.0625, 0.0625, 0.0625);
+        this.propeller.display();
+        this.scene.popMatrix();
+
+        //Right Propeller
+        this.scene.pushMatrix();
+        this.scene.translate(-0.1625, -0.55, -0.3125);
+        this.scene.scale(0.0625, 0.0625, 0.0625);
+        this.propeller.display();
         this.scene.popMatrix();
 
         //Horizontal left fin
