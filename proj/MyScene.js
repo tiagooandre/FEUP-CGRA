@@ -32,6 +32,7 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
+        this.terrain = new MyTerrain(this);
 
         this.objects = [
             new MyCylinder(this, 20),
@@ -69,6 +70,15 @@ class MyScene extends CGFscene {
             'CubeMap': 1,
             'Mountain': 2
         };
+
+        // ---- Applied Material
+        this.material = new CGFappearance(this);
+        this.material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.material.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.material.setShininess(10.0);
+        this.material.loadTexture('images/earth.jpg');
+        this.material.setTextureWrap('REPEAT', 'REPEAT');
 
         this.appearance.setTexture(this.fixedTextures[this.selectedTexture]);
         this.appearance.setTextureWrap('REPEAT', 'REPEAT');
@@ -148,8 +158,13 @@ class MyScene extends CGFscene {
 
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
-        
+        this.setDefaultAppearance();
+
+        // ---- BEGIN Primitive drawing section
+
         // Draw axis
+        this.pushMatrix();
+
         if (this.displayAxis)
             this.axis.display();
 
@@ -159,10 +174,12 @@ class MyScene extends CGFscene {
             this.vehicle.display();
             this.popMatrix();
         }
+        this.popMatrix();
 
-        this.setDefaultAppearance();
+        this.material.apply();
+        this.terrain.display();
 
-        // ---- BEGIN Primitive drawing section
+
         if (this.selectedElement < 2) {
             this.appearance.setTexture(this.fixedTextures[this.selectedElement]);
         } else {
