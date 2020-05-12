@@ -4,7 +4,7 @@ class MyTerrain extends CGFobject {
 
         this.terrainShader = new CGFshader(scene.gl, 'shaders/terrain.vert', 'shaders/terrain.frag');
         this.texture1 = new CGFtexture(scene, 'images/colormap.png');
-        this.texture2 = new CGFtexture(scene, 'images/heightmapipad.png');
+        this.texture2 = new CGFtexture(scene, 'images/heightmapipad2.png');
 
         this.terrainShader.setUniformsValues({ uSampler1: 0});
         this.terrainShader.setUniformsValues({ uSampler2: 1});
