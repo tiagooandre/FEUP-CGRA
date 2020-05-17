@@ -7,19 +7,20 @@ const SupplyStates = {
 class MySupply extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.sypply = new MyUnitCubeQuad(this.scene);
-        this.state = SupplyStates.FALLING; // TODO - trocar para INACTIVE quando terminar a modelação
+        this.supply = new MyUnitCubeQuad(this.scene);
+        this.state = SupplyStates.INACTIVE; // TODO - trocar para INACTIVE quando terminar a modelação
+        this.x = 0;
+        this.y = 10;
+        this.z = 0;
+        this.passedtime = 0;
     }
 
-    update(elapsedtime) {
+    update() {
         if (this.state === SupplyStates.FALLING) {
-            this.passedtime += elapsedtime;
-            this.y = this.fallingPoint - (this.passedtime * 0.0027);
+            this.passedtime++;
+            this.y -= (this.passedtime * 0.0027);
             if (this.y <= 0.4)
                 this.land();
-        }
-        if (this.state === SupplyStates.INACTIVE) {
-            this.fallingPoint = this.scene.vehicle.y - 1.0;
         }
     }
 
@@ -34,16 +35,24 @@ class MySupply extends CGFobject {
         this.state = SupplyStates.LANDED;
     }
 
+    reset() {
+        this.x = 0;
+        this.y = 10;
+        this.z = 0;
+        this.passedtime = 0;
+        this.state = SupplyStates.INACTIVE;
+    }
+
     display() {
         if (this.state === SupplyStates.FALLING) {
             this.scene.pushMatrix();
-            this.scene.translate(0, 5, 0);
+            this.scene.translate(this.x, this.y, this.z);
             this.supply.display(/*????????*/);
             this.scene.popMatrix();
         }
         else if (this.state === SupplyStates.LANDED) {
             this.scene.pushMatrix();
-            this.scene.translate(0, 5, 0);
+            this.scene.translate(this.x, this.y, this.z);
             this.supply.display(/*????????*/);
             this.scene.popMatrix();
         }

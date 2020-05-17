@@ -7,6 +7,7 @@ class MyVehicle extends CGFobject {
 
         //
         this.body = new MyZeppelin(this.scene);
+        this.flag = new MyPlane(this.scene);
 
         //control variables
         this.angle = 0; //ângulo em torno dos yy
@@ -131,13 +132,13 @@ class MyVehicle extends CGFobject {
 
         this.scene.rotate(this.angle * Math.PI / 180.0, 0, 1, 0); //Orientar o veículo
 
-        // this.scene.translate(0, 0, -1); //Centrar o veículo
-
-
-        //this.scene.scale(1, 1, 2);
-        //this.scene.rotate(90.0 * Math.PI / 180.0, 1, 0, 0);
-        // super.display();
         this.body.display();
+        this.scene.pushMatrix();
+        this.scene.translate(0, 10, -2);
+        this.scene.rotate(Math.PI / 2, 0, 1, 0);
+        this.scene.scale(1, 0.5, 1);
+        this.flag.display();
+        this.scene.popMatrix();
         this.scene.popMatrix();
     }
 }

@@ -46,6 +46,16 @@ class MyScene extends CGFscene {
             'Cube': 2
         };
 
+        this.supplies = [
+            new MySupply(this),
+            new MySupply(this),
+            new MySupply(this),
+            new MySupply(this),
+            new MySupply(this)
+        ];
+
+        this.nSuppliesDelivered = 0;
+
         this.vehicle = new MyVehicle(this, 4);
 
         //Objects connected to MyInterface
@@ -129,12 +139,23 @@ class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyR")) {
             this.vehicle.reset();
+            this.supplies[0].reset();
+            this.supplies[1].reset();
+            this.supplies[2].reset();
+            this.supplies[3].reset();
+            this.supplies[4].reset();
+            this.nSuppliesDelivered = 0;
             keysPressed = true;
         }
 
         if (this.gui.isKeyPressed("KeyP") && !this.vehicle.autopilot) {
             this.vehicle.activeautopilot();
             keysPressed = true;
+        }
+
+        if (this.gui.isKeyPressed("KeyL") && this.nSuppliesDelivered < 5 && !this.vehicle.autopilot) {
+            this.supplies[this.nSuppliesDelivered].drop(this.vehicle.posx, this.vehicle.posz);
+            this.nSuppliesDelivered++;
         }
 
         if (keysPressed)
@@ -144,6 +165,11 @@ class MyScene extends CGFscene {
     update(t){
         this.checkKeys();
         this.vehicle.update();
+        this.supplies[0].update(t);
+        this.supplies[1].update(t);
+        this.supplies[2].update(t);
+        this.supplies[3].update(t);
+        this.supplies[4].update(t);
     }
 
     display() {
@@ -188,6 +214,12 @@ class MyScene extends CGFscene {
         this.appearance.apply();
 
         this.objects[this.selectedElement].display();
+
+        this.supplies[0].display();
+        this.supplies[1].display();
+        this.supplies[2].display();
+        this.supplies[3].display();
+        this.supplies[4].display();
         // ---- END Primitive drawing section
     }
 }
