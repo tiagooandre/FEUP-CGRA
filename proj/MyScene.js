@@ -57,6 +57,7 @@ class MyScene extends CGFscene {
         this.nSuppliesDelivered = 0;
 
         this.vehicle = new MyVehicle(this, 4);
+        this.billboard = new MyBillboard(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -156,6 +157,7 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyL") && this.nSuppliesDelivered < 5 && !this.vehicle.autopilot) {
             this.supplies[this.nSuppliesDelivered].drop(this.vehicle.posx, this.vehicle.posz);
             this.nSuppliesDelivered++;
+            this.billboard.update();
         }
 
         if (keysPressed)
@@ -164,7 +166,7 @@ class MyScene extends CGFscene {
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         this.checkKeys();
-        this.vehicle.update();
+        this.vehicle.update(t);
         this.supplies[0].update(t);
         this.supplies[1].update(t);
         this.supplies[2].update(t);
@@ -220,6 +222,8 @@ class MyScene extends CGFscene {
         this.supplies[2].display();
         this.supplies[3].display();
         this.supplies[4].display();
+
+        this.billboard.display();
         // ---- END Primitive drawing section
     }
 }

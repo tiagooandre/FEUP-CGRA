@@ -7,7 +7,7 @@ class MyVehicle extends CGFobject {
 
         //
         this.body = new MyZeppelin(this.scene);
-        this.flag = new MyPlane(this.scene);
+        this.flag = new MyPlane(this.scene, 20);
 
         //control variables
         this.angle = 0; //ângulo em torno dos yy
@@ -18,6 +18,16 @@ class MyVehicle extends CGFobject {
 
         this.autopilot = false;
         this.angpilot = 0;
+
+        //flag shader
+        this.flagShader = new CGFshader(scene.gl, "shaders/flag.vert", "shaders/flag.frag");
+        this.flagTexture = new CGFtexture(scene, "images/flag.jpg");
+
+        this.flagWave = 0;
+
+        this.flagShader.setUniformsValues({patchL: this.flag.patchLength});
+        this.flagShader.setUniformsValues({time: this.flagWave});
+        this.flagShader.setUniformsValues({uSampler1: 0});
     }
 
     initBuffers() {
@@ -81,7 +91,7 @@ class MyVehicle extends CGFobject {
         this.initNormalVizBuffers();
     }
 
-    update() {
+    update(t) {
         if (this.autopilot) {
             this.angpilot += 2 * Math.PI / (5 * 60);
         }
@@ -89,6 +99,10 @@ class MyVehicle extends CGFobject {
             this.posz += this.speed * Math.cos(this.angle * Math.PI / 180.0);
             this.posx += this.speed * Math.sin(this.angle * Math.PI / 180.0);
         }
+
+        this.flagWave += 1.0;
+        if (this.flagWave > 10.0) this.flagWave = 0.0;
+        this.flagShader.setUniformsValues({time: this.flagWave});
     }
 
     activeautopilot() {
@@ -133,12 +147,20 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(this.angle * Math.PI / 180.0, 0, 1, 0); //Orientar o veículo
 
         this.body.display();
+
+        this.scene.setActiveShader(this.flagShader);
         this.scene.pushMatrix();
+
+        this.flagTexture.bind(0);
+
         this.scene.translate(0, 10, -2);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.scene.scale(1, 0.5, 1);
         this.flag.display();
+
         this.scene.popMatrix();
+        this.scene.setActiveShader(this.scene.defaultShader);
+
         this.scene.popMatrix();
     }
 }
