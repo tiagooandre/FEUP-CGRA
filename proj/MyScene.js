@@ -54,7 +54,7 @@ class MyScene extends CGFscene {
             new MySupply(this)
         ];
 
-        this.nSuppliesDelivered = 0;
+        this.nSuppliesDelivered = 0.0;
 
         this.vehicle = new MyVehicle(this, 4);
         this.billboard = new MyBillboard(this);
@@ -146,6 +146,7 @@ class MyScene extends CGFscene {
             this.supplies[3].reset();
             this.supplies[4].reset();
             this.nSuppliesDelivered = 0;
+            this.billboard.update();
             keysPressed = true;
         }
 

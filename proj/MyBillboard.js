@@ -10,10 +10,12 @@ class MyBillboard extends CGFobject {
         this.billboardShader = new CGFshader(scene.gl, "shaders/billboard.vert", "shaders/billboard.frag");
         this.billboardTexture = new CGFtexture(this.scene, "images/billboard.png");
 
-        this.progressShader = new CGFshader(scene.gl, "shaders/prograssBar.vert", "shaders/progressBar.frag");
+        this.supportShader = new CGFshader(scene.gl, "shaders/support.vert", "shaders/support.frag");
+
+        this.progressShader = new CGFshader(scene.gl, "shaders/progressBar.vert", "shaders/progressBar.frag");
 
         this.billboardShader.setUniformsValues({uSampler1: 0});
-        this.progressShader.setUniformsValues({nSupplies: this.scene.nSuppliesDelivered})
+        this.progressShader.setUniformsValues({nSupplies: this.scene.nSuppliesDelivered});
     }
 
     update() {
@@ -30,6 +32,8 @@ class MyBillboard extends CGFobject {
         this.scene.scale(2, 1, 1);
         this.base.display();
         this.scene.popMatrix();
+
+        this.scene.setActiveShader(this.supportShader);
 
         this.scene.pushMatrix();
         this.scene.translate(0.95, 0.5, 0);
