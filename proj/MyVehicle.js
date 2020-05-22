@@ -11,10 +11,13 @@ class MyVehicle extends CGFobject {
 
         //control variables
         this.angle = 0; //ângulo em torno dos yy
+        this.addangle = 0;
         this.speed = 0; //velocidade
         this.posx = 0;
         this.posy = 0;  //posição
-        this.posz = 0;
+        this.posz = 0
+        this.centerx = 0;
+        this.centerz = 0;
 
         this.autopilot = false;
         this.angpilot = 0;
@@ -91,13 +94,42 @@ class MyVehicle extends CGFobject {
         this.initNormalVizBuffers();
     }
 
-    update(t) {
+    update(elapsedTime) { //TRATAR DE UPDATE MYSCENE.JS
         if (this.autopilot) {
-            this.angpilot += 2 * Math.PI / (5 * 60);
+            this.angpilot += 2.0 * Math.PI * elapsedTime / 5000.0;
+            let deltaang = 2.0 * Math.PI * elapsedTime / 5000.0;
+            this.angle -= deltaang * 180.0 / Math.PI;
+
+            console.log("posx: " + this.posx);
+            console.log("posz: " + this.posz);
+
+            this.posx -= this.centerx;
+            this.posz -= this.centerz;
+
+            let x = this.posx * Math.cos(deltaang) - this.posz*Math.sin(deltaang);
+            let z = this.posx * Math.sin(deltaang) + this.posz*Math.cos(deltaang);
+
+            this.posx = x + this.centerx;
+            this.posz = z + this.centerz;
+
+
+            console.log("centerx: " + this.centerx);
+            console.log("centerz: " + this.centerz);
+            console.log("Elapsed: " + elapsedTime);
+            console.log("x: " + x);
+            console.log("z: " + z);
+            console.log("DeltaAng: " + deltaang);
+
         }
         else {
-            this.posz += this.speed * Math.cos(this.angle * Math.PI / 180.0);
+            // Verificar se necessita alterações
             this.posx += this.speed * Math.sin(this.angle * Math.PI / 180.0);
+            this.posz += this.speed * Math.cos(this.angle * Math.PI / 180.0);
+
+            /*this.angle += this.addangle * elapsedTime / 80;
+            this.addangle = 0;
+            this.posx += elapsedTime * this.speed * Math.sin(this.angle * Math.PI/180.0);
+            this.posz += elapsedTime * this.speed * Math.cos(this.angle * Math.PI/180.0);*/
         }
 
         this.flagWave += 1.0;
@@ -107,7 +139,9 @@ class MyVehicle extends CGFobject {
 
     activeautopilot() {
         this.autopilot = true;
-        this.angpilot = 0;
+        this.angpilot = (this.angle - 90.0) * Math.PI/180.0;
+        this.centerx = this.posx + Math.sin(this.angpilot) * 5.0;
+        this.centerz = this.posz + Math.cos(this.angpilot) * 5.0;
     }
 
     turn(val) {
@@ -128,6 +162,7 @@ class MyVehicle extends CGFobject {
         this.angle = 0;
         this.speed = 0;
         this.autopilot = false;
+        this.angpilot = 0;
     }
 
     display() {
@@ -137,14 +172,7 @@ class MyVehicle extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.translate(this.posx, this.posy, this.posz); //Posicionar o veículo
-
-        if (this.autopilot) {
-            this.scene.translate(-5*Math.cos(-this.angle*Math.PI/180.0), 0, -5*Math.sin(-this.angle * Math.PI / 180.0));
-            this.scene.rotate(-this.angpilot, 0, 1, 0);
-            this.scene.translate(5*Math.cos(-this.angle*Math.PI/180.0), 0, 5*Math.sin(-this.angle * Math.PI / 180.0));
-        }
-
-        this.scene.rotate(this.angle * Math.PI / 180.0, 0, 1, 0); //Orientar o veículo
+        this.scene.rotate(this.angle * Math.PI / 180.0, 0, 1, 0); //Roda sobre si mesmo
 
         this.body.display();
 

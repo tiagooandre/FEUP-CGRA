@@ -47,13 +47,13 @@ class MySupply extends CGFobject {
         if (this.state === SupplyStates.FALLING) {
             this.scene.pushMatrix();
             this.scene.translate(this.x, this.y, this.z);
-            this.supply.display(/*????????*/);
+            this.supply.display();
             this.scene.popMatrix();
         }
         else if (this.state === SupplyStates.LANDED) {
             this.scene.pushMatrix();
             this.scene.translate(this.x, this.y, this.z);
-            this.supply.display(/*????????*/);
+            this.supply.display();
             this.scene.popMatrix();
         }
     }

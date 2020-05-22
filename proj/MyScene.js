@@ -57,6 +57,7 @@ class MyScene extends CGFscene {
         this.nSuppliesDelivered = 0.0;
 
         this.vehicle = new MyVehicle(this, 4);
+        this.lastUpdate = 0;
         this.billboard = new MyBillboard(this);
 
         //Objects connected to MyInterface
@@ -155,19 +156,23 @@ class MyScene extends CGFscene {
             keysPressed = true;
         }
 
-        if (this.gui.isKeyPressed("KeyL") && this.nSuppliesDelivered < 5 && !this.vehicle.autopilot) {
+        if (this.gui.isKeyPressed("KeyL") && this.nSuppliesDelivered < 5) {
             this.supplies[this.nSuppliesDelivered].drop(this.vehicle.posx, this.vehicle.posz);
             this.nSuppliesDelivered++;
             this.billboard.update();
         }
-
-        if (keysPressed)
-            this.vehicle.update();
 }
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
+        //autopilot
+        if (this.lastUpdate === 0)
+            this.lastUpdate = t;
+        const elapsedTime = t - this.lastUpdate;
+        this.lastUpdate = t;
+
         this.checkKeys();
-        this.vehicle.update(t);
+        this.vehicle.update(elapsedTime);
+
         this.supplies[0].update(t);
         this.supplies[1].update(t);
         this.supplies[2].update(t);
