@@ -53,7 +53,7 @@ class MySupply extends CGFobject {
     }
 
     land() {
-        this.y = 0.6;
+        this.y = 0.125;
         this.state = SupplyStates.LANDED;
     }
 
@@ -70,7 +70,7 @@ class MySupply extends CGFobject {
             this.drop_tex.apply();
             this.scene.pushMatrix();
             this.scene.translate(this.x, this.y, this.z);
-            this.scene.scale(0.5, 0.5, 0.5);
+            this.scene.scale(0.5, 0.25, 0.5);
             this.supply.display();
             this.scene.popMatrix();
         }
@@ -78,7 +78,7 @@ class MySupply extends CGFobject {
             this.fallen_tex.apply();
             this.scene.pushMatrix();
             this.scene.translate(this.x, this.y, this.z);
-            this.scene.scale(0.5, 0.5, 0.5);
+            this.scene.scale(0.5, 0.25, 0.5);
             this.supply.display();
             this.scene.popMatrix();
         }
