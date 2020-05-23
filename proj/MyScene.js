@@ -55,6 +55,7 @@ class MyScene extends CGFscene {
         ];
 
         this.nSuppliesDelivered = 0.0;
+        this.supplyCooldown = -1.0;
 
         this.vehicle = new MyVehicle(this, 4);
         this.lastUpdate = 0;
@@ -156,9 +157,10 @@ class MyScene extends CGFscene {
             keysPressed = true;
         }
 
-        if (this.gui.isKeyPressed("KeyL") && this.nSuppliesDelivered < 5) {
+        if (this.gui.isKeyPressed("KeyL") && this.nSuppliesDelivered < 5 && this.supplyCooldown < 0) {
             this.supplies[this.nSuppliesDelivered].drop(this.vehicle.posx, this.vehicle.posz);
             this.nSuppliesDelivered++;
+            this.supplyCooldown = 10;
             this.billboard.update();
         }
 }
@@ -169,6 +171,8 @@ class MyScene extends CGFscene {
             this.lastUpdate = t;
         const elapsedTime = t - this.lastUpdate;
         this.lastUpdate = t;
+
+        this.supplyCooldown--;
 
         this.checkKeys();
         this.vehicle.update(elapsedTime);
