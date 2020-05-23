@@ -22,6 +22,8 @@ class MyVehicle extends CGFobject {
         this.autopilot = false;
         this.angpilot = 0;
 
+        this.propellerang = 0;
+
         //flag shader
         this.flagShader = new CGFshader(scene.gl, "shaders/flag.vert", "shaders/flag.frag");
         this.flagTexture = new CGFtexture(scene, "images/flag.jpg");
@@ -100,9 +102,6 @@ class MyVehicle extends CGFobject {
             let deltaang = 2.0 * Math.PI * elapsedTime / 5000.0;
             this.angle -= deltaang * 180.0 / Math.PI;
 
-            console.log("posx: " + this.posx);
-            console.log("posz: " + this.posz);
-
             this.posx -= this.centerx;
             this.posz -= this.centerz;
 
@@ -111,26 +110,14 @@ class MyVehicle extends CGFobject {
 
             this.posx = x + this.centerx;
             this.posz = z + this.centerz;
-
-
-            console.log("centerx: " + this.centerx);
-            console.log("centerz: " + this.centerz);
-            console.log("Elapsed: " + elapsedTime);
-            console.log("x: " + x);
-            console.log("z: " + z);
-            console.log("DeltaAng: " + deltaang);
-
         }
         else {
             // Verificar se necessita alterações
             this.posx += this.speed * Math.sin(this.angle * Math.PI / 180.0);
             this.posz += this.speed * Math.cos(this.angle * Math.PI / 180.0);
+}
 
-            /*this.angle += this.addangle * elapsedTime / 80;
-            this.addangle = 0;
-            this.posx += elapsedTime * this.speed * Math.sin(this.angle * Math.PI/180.0);
-            this.posz += elapsedTime * this.speed * Math.cos(this.angle * Math.PI/180.0);*/
-        }
+        this.propellerang += 25 * this.speed;
 
         this.flagWave += 1.0;
         if (this.flagWave > 10.0) this.flagWave = 0.0;
@@ -142,6 +129,7 @@ class MyVehicle extends CGFobject {
         this.angpilot = (this.angle - 90.0) * Math.PI/180.0;
         this.centerx = this.posx + Math.sin(this.angpilot) * 5.0;
         this.centerz = this.posz + Math.cos(this.angpilot) * 5.0;
+        this.speed = 0.1;
     }
 
     turn(val) {

@@ -28,6 +28,7 @@ class MyZeppelin extends CGFobject {
         //Left Propeller
         this.scene.pushMatrix();
         this.scene.translate(0.1625, -0.55, -0.3125);
+        this.scene.rotate(this.scene.vehicle.propellerang, 0, 0, 1);
         this.scene.scale(0.0625, 0.0625, 0.0625);
         this.propeller.display();
         this.scene.popMatrix();
@@ -35,6 +36,7 @@ class MyZeppelin extends CGFobject {
         //Right Propeller
         this.scene.pushMatrix();
         this.scene.translate(-0.1625, -0.55, -0.3125);
+        this.scene.rotate(this.scene.vehicle.propellerang, 0, 0, 1);
         this.scene.scale(0.0625, 0.0625, 0.0625);
         this.propeller.display();
         this.scene.popMatrix();
