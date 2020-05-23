@@ -18,14 +18,23 @@ class MySupply extends CGFobject {
     }
 
     initMaterials() {
-
+        //Dropping texture
         this.drop_tex = new CGFappearance(this.scene);
         this.drop_tex.setAmbient(0.1, 0.1, 0.1, 1);
         this.drop_tex.setDiffuse(0.9, 0.9, 0.9, 1);
         this.drop_tex.setSpecular(0.1, 0.1, 0.1, 1);
         this.drop_tex.setShininess(10.0);
-        this.drop_tex.loadTexture('images/duff.jpg');
+        this.drop_tex.loadTexture('images/supply.jpg');
         this.drop_tex.setTextureWrap('REPEAT', 'REPEAT');
+
+        //Fallen texture
+        this.fallen_tex = new CGFappearance(this.scene);
+        this.fallen_tex.setAmbient(0.1, 0.1, 0.1, 1);
+        this.fallen_tex.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.fallen_tex.setSpecular(0.1, 0.1, 0.1, 1);
+        this.fallen_tex.setShininess(10.0);
+        this.fallen_tex.loadTexture('images/supply_fallen.jpg');
+        this.fallen_tex.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     update() {
@@ -66,7 +75,7 @@ class MySupply extends CGFobject {
             this.scene.popMatrix();
         }
         else if (this.state === SupplyStates.LANDED) {
-            this.drop_tex.apply();
+            this.fallen_tex.apply();
             this.scene.pushMatrix();
             this.scene.translate(this.x, this.y, this.z);
             this.scene.scale(0.5, 0.5, 0.5);
