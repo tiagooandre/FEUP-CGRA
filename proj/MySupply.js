@@ -24,7 +24,7 @@ class MySupply extends CGFobject {
         this.drop_tex.setDiffuse(0.9, 0.9, 0.9, 1);
         this.drop_tex.setSpecular(0.1, 0.1, 0.1, 1);
         this.drop_tex.setShininess(10.0);
-        this.drop_tex.loadTexture('images/supply.jpg');
+        this.drop_tex.loadTexture('images/duff.jpg');
         this.drop_tex.setTextureWrap('REPEAT', 'REPEAT');
     }
 
@@ -61,7 +61,7 @@ class MySupply extends CGFobject {
             this.drop_tex.apply();
             this.scene.pushMatrix();
             this.scene.translate(this.x, this.y, this.z);
-            this.scene.scale(0.5, 0.25, 0.25);
+            this.scene.scale(0.5, 0.5, 0.5);
             this.supply.display();
             this.scene.popMatrix();
         }
@@ -69,7 +69,7 @@ class MySupply extends CGFobject {
             this.drop_tex.apply();
             this.scene.pushMatrix();
             this.scene.translate(this.x, this.y, this.z);
-            this.scene.scale(0.5, 0.25, 0.25);
+            this.scene.scale(0.5, 0.5, 0.5);
             this.supply.display();
             this.scene.popMatrix();
         }
