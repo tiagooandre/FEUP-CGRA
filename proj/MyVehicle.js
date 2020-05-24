@@ -132,6 +132,10 @@ class MyVehicle extends CGFobject {
         this.speed = 0.1;
     }
 
+    deactiveautopilot() {
+        this.autopilot = false;
+    }
+
     turn(val) {
         this.angle += val;
     }
