@@ -73,14 +73,14 @@ class MyScene extends CGFscene {
         ];
 
         this.cubeTextures = [
-            new CGFtexture(this, "images/example.png"),
             new CGFtexture(this, "images/cubemap.png"),
+            new CGFtexture(this, "images/example.png"),
             new CGFtexture(this, "images/mountain.png")
         ];
 
         this.cubeTextureOptions = {
-            'Example': 0,
-            'CubeMap': 1,
+            'CubeMap': 0,
+            'Example': 1,
             'Mountain': 2
         };
 
