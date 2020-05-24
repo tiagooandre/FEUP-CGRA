@@ -2,8 +2,8 @@ class MyCabin extends CGFobject {
     constructor(scene) {
         super(scene);
 
-        this.myCylinder = new MyCylinder(this.scene, 30);
-        this.myHalfSphere = new MyHalfSphere(this.scene, 32, 16);
+        this.myCylinder = new MyCylinder(this.scene, 10);
+        this.myHalfSphere = new MySphere(this.scene, 16, 8);
     }
 
     display(){
