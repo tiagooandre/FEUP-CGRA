@@ -158,10 +158,6 @@ class MyVehicle extends CGFobject {
     }
 
     display() {
-        this.scene.setDiffuse(0, 0, 1);
-        this.scene.setSpecular(0, 0, 0, 1);
-        this.scene.setAmbient(0, 0, 0.5, 1);
-
         this.scene.pushMatrix();
         this.scene.translate(this.posx, this.posy, this.posz); //Posicionar o veículo
         this.scene.rotate(this.angle * Math.PI / 180.0, 0, 1, 0); //Roda sobre si mesmo
