@@ -1,0 +1,8 @@
+Turma 1 - Grupo 09
+
+Daniel Garcia Lima Sarmento da Silva - 201806524
+Tiago André Macedo Pinto - 201808907
+
+Observações:
+- Foram implementadas todas as funcionalidades pedidas;
+- O piloto automático tal como pedido inicia-se clicando na tecla P e poderá também ser desativado clicando na mesma tecla fazendo com que o veículo tenha uma velocidade e direção constante depois de desativado.
